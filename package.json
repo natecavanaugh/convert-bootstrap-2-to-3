@@ -1,0 +1,22 @@
+{
+  "name": "convert-bootstrap-2-to-3",
+  "version": "0.0.1",
+  "description": "Converts Bootstrap 2 to 3",
+  "main": "index.js",
+  "bin": {
+    "bs3": "./index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nate Cavanaugh",
+  "license": "BSD",
+  "dependencies": {
+    "colors": "^0.6.2",
+    "async": "^0.7.0",
+    "cli": "^0.4.5",
+    "bootstrap-sass": "git://github.com/twbs/bootstrap-sass",
+    "yui": "^3.16.0",
+    "optimist": "^0.6.1"
+  }
+}
