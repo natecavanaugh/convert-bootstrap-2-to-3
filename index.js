@@ -1,15 +1,11 @@
 #!/usr/bin/env node
 
 var async = require('async');
-var cli = require('cli');
 
 var fs = require('fs');
-var path = require('path');
 
 var re = require('./lib/regex');
 var base = require('./lib/base');
-
-var convertCss = require('./lib/css');
 
 var getRegExp = re.getRegExp;
 var getDiff = base.getDiff;
@@ -56,11 +52,10 @@ else {
 	run(args);
 }
 
-var convertVars = require('./lib/vars');
-
+var convertCss = require('./lib/css');
 var convertHtml = require('./lib/html');
-
 var convertJs = require('./lib/js');
+var convertVars = require('./lib/vars');
 
 function processContent(content) {
 	var processed = content;
@@ -82,7 +77,7 @@ function processContent(content) {
 	}
 
 	return processed;
-};
+}
 
 function run(args) {
 	var series = args.map(
@@ -129,11 +124,11 @@ function run(args) {
 
 					cb(null, content);
 				}
-			}
+			};
 		}
 	);
 
 	async.series(series, function(err, result) {
 		// console.log(result);
 	});
-};
+}
