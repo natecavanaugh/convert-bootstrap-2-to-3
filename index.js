@@ -16,6 +16,14 @@ var log = base.log;
 var YUI = require('yui').YUI;
 var A = YUI().use('yui-base', 'oop', 'array-extras');
 
+var updateNotifier = require('update-notifier');
+
+var notifier = updateNotifier();
+
+if (notifier.update) {
+	notifier.notify(true);
+}
+
 var argv = base.argv;
 
 var args = base.args;
