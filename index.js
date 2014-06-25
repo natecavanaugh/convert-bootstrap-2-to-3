@@ -20,14 +20,11 @@ var argv = base.argv;
 var args = base.args;
 
 var VARS = base.VARS;
-var CSS_CLASS_NAMES = base.CSS_CLASS_NAMES;
-var HTML_CLASS_NAMES = base.HTML_CLASS_NAMES;
-var JS_CLASS_NAMES = base.JS_CLASS_NAMES;
-var CHECK_VARS = base.CHECK_VARS;
-var REMOVE_OLD_VARS = base.REMOVE_OLD_VARS;
 var VERBOSE = base.VERBOSE;
+var QUIET = base.QUIET;
 var INLINE_REPLACE = base.INLINE_REPLACE;
-var SHOW_DIFF = base.SHOW_DIFF;
+
+var INDENT = log.INDENT;
 
 var PREFIX_LINE_NUM = base.PREFIX_LINE_NUM;
 
@@ -35,28 +32,6 @@ var convertCss = require('./lib/css');
 var convertHtml = require('./lib/html');
 var convertJs = require('./lib/js');
 var convertVars = require('./lib/vars');
-
-function processContent(content) {
-	var processed = content;
-
-	if (VARS) {
-		processed = convertVars(processed);
-	}
-
-	if (CSS_CLASS_NAMES) {
-		processed = convertCss(processed);
-	}
-
-	if (HTML_CLASS_NAMES) {
-		processed = convertHtml(processed);
-	}
-
-	if (JS_CLASS_NAMES) {
-		processed = convertJs(processed);
-	}
-
-	return processed;
-}
 
 var series = args.map(
 	function(file) {
@@ -94,22 +69,37 @@ var series = args.map(
 
 				var changed = (content != data);
 
-				if (changed) {
+				var logSize = log.size();
+
+				var includeHeaderFooter = (logSize || !QUIET);
+
+				if (includeHeaderFooter) {
 					console.log('File:'.blackBG + ' ' + file.underline);
+				}
 
+				if (logSize) {
 					log.flush(true);
+				}
+				else if (includeHeaderFooter) {
+					console.log(INDENT + 'clear');
+				}
 
+				if (includeHeaderFooter) {
 					console.log('----'.subtle);
 				}
 
 				if (INLINE_REPLACE && changed) {
-					fs.writeFile(file, content, function(err, result) {
-						if (err) {
-							return cb(err);
-						}
+					fs.writeFile(
+						file,
+						content,
+						function(err, result) {
+							if (err) {
+								return cb(err);
+							}
 
-						cb(null, content);
-					});
+							cb(null, content);
+						}
+					);
 				}
 				else {
 					cb(null, content);
