@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 var async = require('async');
+var cli = require('cli');
 
 var fs = require('fs');
 
@@ -20,7 +21,6 @@ var argv = base.argv;
 var args = base.args;
 
 var VARS = base.VARS;
-var VERBOSE = base.VERBOSE;
 var QUIET = base.QUIET;
 var INLINE_REPLACE = base.INLINE_REPLACE;
 
@@ -33,13 +33,11 @@ var convertHtml = require('./lib/html');
 var convertJs = require('./lib/js');
 var convertVars = require('./lib/vars');
 
+var trackedFiles = {};
+
 var series = args.map(
 	function(file) {
 		return function(cb) {
-			if (VERBOSE) {
-				console.log(file.help);
-			}
-
 			fs.readFile(
 				file,
 				'utf-8',
@@ -82,6 +80,8 @@ var series = args.map(
 
 					if (logSize) {
 						log.flush(true);
+
+						trackedFiles[file] = true;
 					}
 					else if (includeHeaderFooter) {
 						console.log(INDENT + 'clear');
@@ -113,6 +113,23 @@ var series = args.map(
 	}
 );
 
-async.series(series, function(err, result) {
-	// console.log(result);
-});
+var callback = function() {};
+
+if (base.OPEN_FILES) {
+	callback = function(err, result) {
+		var filesToOpen = Object.keys(trackedFiles);
+
+		if (filesToOpen.length) {
+			cli.exec(
+				'git config --get user.editor',
+				function(res) {
+					cli.exec(
+						'open -a "' + res[0] + '" "' + filesToOpen.join('" "') + '"'
+					);
+				}
+			);
+		}
+	};
+}
+
+async.series(series, callback);
