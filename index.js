@@ -40,71 +40,75 @@ var series = args.map(
 				console.log(file.help);
 			}
 
-			fs.readFile(file, 'utf-8', function (err, data) {
-				if (err) {
-					return cb(err);
-				}
+			fs.readFile(
+				file,
+				'utf-8',
+				function(err, data) {
+					if (err) {
+						return cb(err);
+					}
 
-				var formatter;
+					var formatter;
 
-				if (re.REGEX_EXT_CSS.test(file)) {
-					formatter = function(content, file) {
-						content = convertCss(content, file);
+					if (re.REGEX_EXT_CSS.test(file)) {
+						formatter = function(content, file) {
+							content = convertCss(content, file);
 
-						if (VARS) {
-							content = convertVars(content, file);
-						}
-
-						return content;
-					};
-				}
-				else if (re.REGEX_EXT_JS.test(file)) {
-					formatter = convertJs;
-				}
-				else if (re.REGEX_EXT_HTML.test(file)) {
-					formatter = convertHtml;
-				}
-
-				var content = formatter(data, file);
-
-				var changed = (content != data);
-
-				var logSize = log.size();
-
-				var includeHeaderFooter = (logSize || !QUIET);
-
-				if (includeHeaderFooter) {
-					console.log('File:'.blackBG + ' ' + file.underline);
-				}
-
-				if (logSize) {
-					log.flush(true);
-				}
-				else if (includeHeaderFooter) {
-					console.log(INDENT + 'clear');
-				}
-
-				if (includeHeaderFooter) {
-					console.log('----'.subtle);
-				}
-
-				if (INLINE_REPLACE && changed) {
-					fs.writeFile(
-						file,
-						content,
-						function(err, result) {
-							if (err) {
-								return cb(err);
+							if (VARS) {
+								content = convertVars(content, file);
 							}
 
-							cb(null, content);
-						}
-					);
+							return content;
+						};
+					}
+					else if (re.REGEX_EXT_JS.test(file)) {
+						formatter = convertJs;
+					}
+					else if (re.REGEX_EXT_HTML.test(file)) {
+						formatter = convertHtml;
+					}
+
+					var content = formatter(data, file);
+
+					var changed = (content != data);
+
+					var logSize = log.size();
+
+					var includeHeaderFooter = (logSize || !QUIET);
+
+					if (includeHeaderFooter) {
+						console.log('File:'.blackBG + ' ' + file.underline);
+					}
+
+					if (logSize) {
+						log.flush(true);
+					}
+					else if (includeHeaderFooter) {
+						console.log(INDENT + 'clear');
+					}
+
+					if (includeHeaderFooter) {
+						console.log('----'.subtle);
+					}
+
+					if (INLINE_REPLACE && changed) {
+						fs.writeFile(
+							file,
+							content,
+							function(err, result) {
+								if (err) {
+									return cb(err);
+								}
+
+								cb(null, content);
+							}
+						);
+					}
+					else {
+						cb(null, content);
+					}
 				}
-				else {
-					cb(null, content);
-				}
-			});
+			);
 		};
 	}
 );
