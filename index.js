@@ -49,11 +49,11 @@ var series = args.map(
 					var formatter;
 
 					if (re.REGEX_EXT_CSS.test(file)) {
-						formatter = function(content, file) {
-							content = convertCss(content, file);
+						formatter = function(content, file, lineOffset) {
+							content = convertCss(content, file, lineOffset);
 
 							if (VARS) {
-								content = convertVars(content, file);
+								content = convertVars(content, file, lineOffset);
 							}
 
 							return content;
@@ -66,7 +66,7 @@ var series = args.map(
 						formatter = convertHtml;
 					}
 
-					var content = formatter(data, file);
+					var content = formatter(data, file, 0);
 
 					var changed = (content != data);
 
