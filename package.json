@@ -16,9 +16,9 @@
     "cli": "^0.4.5",
     "colors": "^0.6.2",
     "diff": "^1.0.8",
+    "lodash": "^3.10.1",
     "optimist": "^0.6.1",
-    "update-notifier": "^0.1.10",
-    "yui": "^3.16.0"
+    "update-notifier": "^0.1.10"
   },
   "devDependencies": {},
   "repository": {
