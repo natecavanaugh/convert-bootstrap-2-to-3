@@ -15,9 +15,13 @@
     "async": "^0.7.0",
     "cli": "^0.4.5",
     "colors": "^0.6.2",
+    "content-formatter": "^1.1.0",
+    "content-logger": "0.0.3",
     "diff": "^1.0.8",
     "lodash": "^3.10.1",
     "optimist": "^0.6.1",
+    "roolz": "^1.0.2",
+    "string-sub": "0.0.1",
     "update-notifier": "^0.1.10"
   },
   "devDependencies": {},
