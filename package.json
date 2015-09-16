@@ -14,6 +14,7 @@
   "dependencies": {
     "async": "^0.7.0",
     "cli": "^0.4.5",
+    "cli-color-keywords": "0.0.1",
     "colors": "^0.6.2",
     "content-formatter": "^1.1.0",
     "content-logger": "0.0.3",
