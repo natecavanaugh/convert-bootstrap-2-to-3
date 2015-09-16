@@ -4,7 +4,7 @@
   "description": "Converts Bootstrap 2 to 3",
   "main": "index.js",
   "bin": {
-    "bs3": "./index.js"
+    "bs3": "./bin/index.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
