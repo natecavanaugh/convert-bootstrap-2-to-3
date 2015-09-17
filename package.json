@@ -24,7 +24,21 @@
     "string-sub": "0.0.1",
     "to-int": "^0.1.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "mocha": "*",
+    "chai": "*",
+    "chai-string": "*",
+    "coveralls": "*",
+    "gulp-coveralls": "*",
+    "gulp-istanbul": "*",
+    "istanbul": "*",
+    "sinon": "*",
+    "gulp": "*",
+    "gulp-load-plugins": "*",
+    "gulp-help": "*",
+    "run-sequence": "*",
+    "gulp-mocha": "*"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/natecavanaugh/convert-bootstrap-2-to-3.git"
