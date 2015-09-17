@@ -22,8 +22,7 @@
     "optimist": "^0.6.1",
     "roolz": "^1.0.2",
     "string-sub": "0.0.1",
-    "to-int": "^0.1.0",
-    "underscore.string": "^3.2.2"
+    "to-int": "^0.1.0"
   },
   "devDependencies": {},
   "repository": {
