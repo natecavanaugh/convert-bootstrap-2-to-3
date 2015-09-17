@@ -21,8 +21,7 @@
     "lodash": "^3.10.1",
     "optimist": "^0.6.1",
     "roolz": "^1.0.2",
-    "string-sub": "0.0.1",
-    "update-notifier": "^0.1.10"
+    "string-sub": "0.0.1"
   },
   "devDependencies": {},
   "repository": {
