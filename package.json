@@ -2,7 +2,7 @@
   "name": "convert-bootstrap-2-to-3",
   "version": "1.0.1",
   "description": "Converts Bootstrap 2 to 3",
-  "main": "index.js",
+  "main": "lib/cli.js",
   "bin": {
     "bs3": "./bin/index.js"
   },
