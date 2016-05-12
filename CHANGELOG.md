@@ -2,6 +2,11 @@
 * No changes
 ***
 
+## v1.0.3 - May 12, 2016
+
+* Fix: resolved issue where illegal operations on directories were halting further processing of other files
+* Update: improved error messages of read/write errors
+
 ## v1.0.2 - November 10, 2015
 
 * Change main file to lib/cli.js for programmatically invoking, necessary because of npm 3.x flat dependency tree
